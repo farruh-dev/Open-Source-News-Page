@@ -1,0 +1,34 @@
+<%- include('parts/header') %>
+<% var error %> 
+
+    <section>
+        <div class="conatiner d-flex flex-column vh-100 justify-content-center align-items-center">
+            <h1>Sing up</h1>
+            <form class="mt-4" action="/signup" method="POST">
+                <% if(error) { %>
+                    <div id="errorDiv" class="alert alert-danger my-2 text-center"><%= error %> </div> 
+                <% } %> 
+
+                <label for="newUserNameInput">Name <span style="color: rgb(230, 75, 75);">*</span></label>
+                <input class="form-control mb-3" type="text" name="name" id="newUserNameInput" placeholder="Name" required/>
+
+                <label for="newUserEmailInput">E-mail <span style="color: rgb(230, 75, 75);">*</span></label>
+                <input class="form-control mb-3" type="email" name="email" id="newUserEmailInput" placeholder="E-mail" required/>
+
+                <label for="newUserPasswordInput">Password <span style="color: rgb(230, 75, 75);">*</span></label>
+                <input class="form-control mb-3" type="password" name="password" id="newUserPasswordInput" placeholder="Password" required/>
+                
+                <label for="newUserPasswordConfigInput">Confirm password <span style="color: rgb(230, 75, 75);">*</span></label>
+                <input class="form-control mb-3" type="password" name="confpassword" id="newUserPasswordConfigInput" placeholder="***" required/>
+
+                <button class="btn btn-success w-100 mt-4" type="submit"><span style="font-size: 20px">Sign up</span></button>
+
+                <a href="/" class=" d-flex flex-column btn btn-outline-primary w-100 mt-2" type="submit"> <span style="font-size: 12px;">Already have account?</span>Login</a>
+
+            </form>
+        </div>
+    </section>
+
+
+</body>
+</html>

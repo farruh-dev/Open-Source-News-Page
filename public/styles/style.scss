@@ -1,0 +1,351 @@
+$primary-color: rgb(102, 255, 153);
+$sec-color: rgb(20, 255, 236);
+$th-color: rgb(13, 115, 119);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    // background-image: linear-gradient(45deg, rgb(251, 78, 78),  rgb(107, 255, 156));
+    background-color: rgb(44, 44, 44);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+select:focus,
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+input[type=checkbox]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: 0 0 6px $sec-color !important;
+
+}
+
+select,
+textarea,
+textarea.form-control,
+input.form-control,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+input[type=checkbox],
+[type=text].form-control,
+[type=password].form-control,
+[type=email].form-control,
+[type=tel].form-control,
+[contenteditable].form-control {
+    border: 1px solid $sec-color !important;
+    color: #fff !important;
+    background-color: rgb(41, 41, 41);
+
+    &:focus {
+        background-color: rgb(31, 31, 31);
+    }
+}
+
+
+.dropdown-toggle::after{
+    display: none !important;
+}
+
+.row {
+
+    width: 140px;
+    position: fixed;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(61, 61, 61);
+    height: 100vh;
+    text-align: center;
+
+    #mainNav {
+        .navbar-brand {
+            font-size: 2rem;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .nav-item {
+                cursor: pointer;
+                width: 80px;
+                height: 80px;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                transition: background-color 0.3s;
+                margin: 10px 0;
+                background-color: transparent;
+                color: #fff !important;
+
+                &:hover {
+                    background-color: rgb(75, 75, 75);
+                }
+
+                i {
+                    font-size: 30px;
+                }
+
+                span {
+                    font-size: 12px;
+                    margin-top: 8px;
+                }
+
+                .nav-link {
+                    color: #fff;
+
+                }
+            }
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background-color: $sec-color;
+            color: rgb(61, 61, 61);
+            box-shadow: 0 0 10px $sec-color;
+        }
+    }
+}
+
+.container {
+    padding-top: 50px;
+    display: flex;
+
+
+    .incomesList {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        .list-item {
+            width: 32%;
+            background-color: rgb(63, 63, 63);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: start;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgb(34, 34, 34);
+
+
+            div{
+                margin: 0 0 10px 0;
+                display: inline-flex;
+            }
+
+            span{
+                color: $th-color;
+            }
+
+            .info{
+                width: 100%;
+
+                .amount{
+                    word-break: break-all;
+                }
+            }
+
+            .deleteBtn{
+                height: 95%;
+                display: flex;
+                align-items: flex-start;
+                align-self: flex-end;
+                button{
+                    position: relative;
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    height: 40px;
+                    width: 40px;
+                    transition: all 0.5s !important;
+
+                    &:hover{
+                        box-shadow: 0 0 5px rgb(251, 78, 78);
+                    }
+
+                    i{
+                        pointer-events: none !important;
+                        margin-right: 3px;
+                    }
+                }
+            }
+
+            .descriptionBox{
+                width: 100%;
+                margin-right: 15px;
+                flex-direction: column;
+
+                .description{
+                    border-radius: 10px;
+                    background-color: rgb(75, 75, 75);
+                    box-shadow: 0 0 10px rgb(41, 41, 41);
+                    padding: 5px 10px;
+                    height: auto;
+                    word-break: break-all !important;
+                    margin: 7px 0 7px 0;
+                }
+            }
+
+            
+        }
+    }
+}
+
+.modal-content {
+    background-color: rgba(41, 41, 41, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 15px #fff;
+
+    .btn-close {
+        background-color: rgb(251, 78, 78);
+    }
+
+    .form-check-input:checked {
+        background-color: rgb(251, 78, 78);
+        border-color: rgb(251, 78, 78);
+        box-shadow: 0 0 6px rgb(251, 78, 78) !important;
+        border: 1px solid rgb(251, 78, 78) !important;
+    }
+    .form-check-input:focus {
+        box-shadow: 0 0 6px rgb(251, 78, 78) !important;
+    }
+
+    label {
+        color: rgb(126, 126, 126);
+    }
+
+    input,
+    select,
+    textarea {
+        background-color: rgb(41, 41, 41);
+        color: #fff;
+
+        &:focus {
+            background-color: rgb(31, 31, 31);
+        }
+    }
+
+    textarea{
+        resize: none !important;
+    }
+
+}
+
+.homeContainer{
+    height: 100vh;
+    #piechart{
+        width: 50%;
+        height: 500px;
+        background-color: rgb(63, 63, 63);
+        box-shadow: 0 0 20px rgb(36, 36, 36);
+        margin-top: 200px;
+        border-radius: 15px;
+    
+        div{
+            div:nth-child(1){
+                width: 100% !important;
+            }
+            svg{
+                width: 100%;
+                height: 100%;
+    
+                g{
+                    text{
+                        font-size: 20px;
+                        color: #fff !important;
+                        fill: $primary-color;
+                    }
+                }
+
+                g:nth-child(2){
+                    height: 200px;
+                }
+    
+            }
+        }
+    
+        rect{
+            width: 100%;
+            height: 400;
+            stroke: none;
+            stroke-width: 0;
+            fill: transparent;
+        }
+    }
+    
+}
+
+.userInfos{
+    width: 400px;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items:  flex-start;
+    justify-content: center;
+
+    .info{
+        width: 100%;
+        margin: 20px 0;
+        padding: 15px;
+
+        span{
+            font-size: 20px;
+            font-weight: 600;
+            color: $th-color;
+
+            margin-right: 20px;
+        }
+
+        div{
+            font-size: 26px;
+            font-weight: 800;
+            color: $primary-color;
+        }
+    }
+}

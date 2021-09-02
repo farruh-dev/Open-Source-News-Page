@@ -1,0 +1,20 @@
+<%- include('parts/header') %>
+<% var error %> 
+
+
+<section>
+    <div class="conatiner d-flex flex-column vh-100 justify-content-center align-items-center">
+        <h1>Login</h1>
+        <form class="mt-4" action="/" method="POST">
+            <% if(error) {%>
+                <div class="alert alert-danger text-center"><%= error %> </div>
+            <% } %> 
+            <input class="form-control mt-3" type="email" name="email" id="userEmailInput" placeholder="E-mail" required/>
+            <input class="form-control mt-3" type="password" name="password" id="userPasswordInput" placeholder="Password" required/>
+
+            <button class="btn btn-primary w-100 mt-4" type="submit"><span style="font-size: 20px">Login</span></button>
+
+            <a href="/signup" class=" d-flex flex-column btn btn-outline-success w-100 mt-2" type="submit"> <span style="font-size: 12px;">No account yet?</span>Sign up</a>
+        </form>
+    </div>
+</section>
