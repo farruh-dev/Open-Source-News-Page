@@ -5,22 +5,9 @@ const { createToken, checkToken } = require('../module/jwt');
 const router = require('express').Router();
 
 router.get('/', (req, res)=>{
-
-    if(!req.cookies.token){
-        res.render('login',{
-            title: 'Login'
-        })
-        return;
-    }
-    const isTrust = checkToken(req.cookies.token)
-
-    if(isTrust){
-        req.user = isTrust
-        res.redirect('/news')
-    }else{
-        res.redirect('/')
-        return
-    }
+    res.render('login', {
+        title: "Login"
+    })
 })
 
 router.post('/', async (req, res) =>{
@@ -39,7 +26,10 @@ router.post('/', async (req, res) =>{
         email: email.toLowerCase(),
     })
 
+    console.log(user);
+
     if(!user){
+        
         res.render('login', {
             title: 'Login',
             error: 'User not found!'
@@ -54,81 +44,21 @@ router.post('/', async (req, res) =>{
         return;
     }
 
-    const token = createToken({
-        user_id: user._id,
-        email: user.email
-    })
-
-    res.cookie('token', token).redirect('/news')
-    
-})
-
-router.get('/signup', (req, res) =>{
-    res.render('register',{
-        title: 'Sign up'
-    })
-})
-
-
-router.post('/signup', async (req, res) =>{
-    const {name, email, password, confpassword} = req.body
-
-    if(!(name && email && password && confpassword)){
-        res.render('register', {
-            title: 'Sign up',
-            error: 'Fill in all empty areas!'
-        })
-        return;
-    }
-
-    if(confpassword != password){
-        res.render('register',{
-            title: 'Sign up',
-            error: 'Password confirmation did not match !'
-        })
-        return;
-    }
-
-    let user = await req.db.users.findOne({
-        email: email.toLowerCase(),
-    })
-
-    if(user && name == user.name){
-        res.render('register', {
-            title: 'Sign up',
-            error: 'User with this name already exist'
-        })
-        return;
-    }
-    else if(user && email == user.email){
-        res.render('register', {
-            title: 'Sign up',
-            error: 'User with this email already exist'
-        })
-        return;
-    }
-
-    if(!user){
-        user = await req.db.users.insertOne({
-            name,
-            email: email.toLowerCase(),
-            password: await createCrypt(password),
-            posts: [],
+    if (user) {
+        const token = await createToken({
+            user_id: user._id,
+            email: user.email
         })
     
-        res.redirect('/')
+        
+        res.cookie('token', await token).redirect('/news')
+        console.log('cookies added', await token);
     }
+    
 })
-
-
-router.get("/logout", async(req, res) =>{
-    console.log(req.cookies.token);
-    res.clearCookie('token').redirect('/')
-})
-
 
 
 module.exports = {
-    router,
-    path: '/'
+    path: '/',
+    router
 }

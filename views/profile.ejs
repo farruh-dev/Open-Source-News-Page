@@ -1,20 +1,90 @@
 <%- include('parts/header') %>
+<% var profile %>
+<% var myPosts %>
 
-<nav>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
     <div class="container">
-        <ul class="nav"></ul>
+        <a class="navbar-brand h1" style="font-size: 26px;" href="#">Yangiliklar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link"  href="/news">Asosiy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/addnews">Yangilik qo'shish</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/myposts">Mening postlarim</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Akkaunt
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile">Profil</a></li>
+                        <li><a class="dropdown-item" href="/settings">Sozlamalar</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Chiqish</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="d-flex mainSearchInputForm" method="POST" action="/news" role="search" autocapitalize="off"'>
+                <input id="mainSearchInput" name="keyword" class="form-control me-2" type="search" placeholder="Izlash"
+                    aria-label="Search">
+                <button class="btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </nav>
-
 <section>
-    <div class="container">
+	<div class="container">
+		<% if(profile) { %>
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+			<% for(let item of profile) {%>
+			<div class="col">
+				<div class="card shadow-sm">
+					<!-- <img class="newsItemPhoto bd-placeholder-img card-img-top" width="100%" height="225"
+                        src="/uploadedPhotos/<%= item.photo %> " /> -->
 
-    </div>
+					<div class="card-body">
+						<div class="userPhoto"> <img src="" alt=""></div>
+						<h4 class="newsItemTitle">Ism: <%= item.name %> </h4>
+
+						<h4 class="text-muted">E-mail: <%= item.email %></h4>
+						<h4 class="text-muted">Postlar soni: <%= myPosts.length %></h4>
+
+						<div class="btn-group">
+							<a id="batafsil" href="/settings" value="<%= item.ID %> "
+								class="btn btn-sm btn-outline-secondary">
+								<!-- <a href="/more">Batafsil</a> -->
+								Batafsil
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% } %>
+
+	</div>
+	<% } %>
+	</div>
 </section>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
 </script>
 
 </body>

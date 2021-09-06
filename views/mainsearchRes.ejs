@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #F7FBFC;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #252525;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        button {
+            outline: none;
+            border: none;
+        }
+
+        select:focus,
+        textarea:focus,
+        textarea.form-control:focus,
+        input.form-control:focus,
+        input[type=text]:focus,
+        input[type=password]:focus,
+        input[type=email]:focus,
+        input[type=number]:focus,
+        [type=text].form-control:focus,
+        [type=password].form-control:focus,
+        [type=email].form-control:focus,
+        [type=tel].form-control:focus,
+        [contenteditable].form-control:focus {
+            border-color: #161D6F;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        select,
+        textarea,
+        textarea.form-control,
+        input.form-control,
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=number],
+        [type=text].form-control,
+        [type=password].form-control,
+        [type=email].form-control,
+        [type=tel].form-control,
+        [contenteditable].form-control {
+            border: 1px solid #769FCD !important;
+            color: #252525 !important;
+            background-color: #D6E6F2;
+        }
+
+        select:focus,
+        textarea:focus,
+        textarea.form-control:focus,
+        input.form-control:focus,
+        input[type=text]:focus,
+        input[type=password]:focus,
+        input[type=email]:focus,
+        input[type=number]:focus,
+        [type=text].form-control:focus,
+        [type=password].form-control:focus,
+        [type=email].form-control:focus,
+        [type=tel].form-control:focus,
+        [contenteditable].form-control:focus {
+            background-color: #F7FBFC;
+        }
+
+        [type="search"]::-webkit-search-cancel-button,
+        [type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        button:focus {
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        .mainSearchInputForm {
+            position: relative;
+            height: 50px;
+        }
+
+        .mainSearchInputForm #mainSearchInput {
+            border-radius: 25px;
+            height: 100%;
+        }
+
+        .mainSearchInputForm .btn {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            right: 5%;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            border-radius: 20px;
+            border: 1px solid #769FCD;
+            background-color: #fff;
+        }
+
+        .mainSearchInputForm .btn:focus,
+        .mainSearchInputForm .btn:hover .lupa {
+            fill: #fff;
+        }
+
+        .mainSearchInputForm .btn:hover {
+            background-color: #769FCD;
+        }
+
+        .mainSearchInputForm .btn:focus {
+            background-color: #769FCD;
+        }
+
+        .mainContainer {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .mainContainer .header {
+            width: 100%;
+            text-align: center;
+            color: #353535;
+        }
+
+        .mainContainer .categories {
+            width: 100%;
+        }
+
+        .mainContainer .categories .categoriesList {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+            padding: 10px;
+            margin: 20px 0 20px 0;
+        }
+
+        .mainContainer .categories .categoriesList .activeCategory {
+            color: brown;
+        }
+
+        .mainContainer .row {
+            width: 100%;
+        }
+
+        .mainContainer .row .col .card img {
+            -o-object-fit: cover;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .modal-content {
+            background-color: rgba(41, 41, 41, 0.2);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            -webkit-box-shadow: 0 0 15px #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        .modal-content .btn-close {
+            background-color: #fb4e4e;
+        }
+
+        .modal-content .form-check-input:checked {
+            background-color: #fb4e4e;
+            border-color: #fb4e4e;
+            -webkit-box-shadow: 0 0 6px #fb4e4e !important;
+            box-shadow: 0 0 6px #fb4e4e !important;
+            border: 1px solid #fb4e4e !important;
+        }
+
+        .modal-content .form-check-input:focus {
+            -webkit-box-shadow: 0 0 6px #fb4e4e !important;
+            box-shadow: 0 0 6px #fb4e4e !important;
+        }
+
+        .modal-content label {
+            color: #7e7e7e;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            background-color: #292929;
+            color: #fff;
+        }
+
+        .modal-content input:focus,
+        .modal-content select:focus,
+        .modal-content textarea:focus {
+            background-color: #1f1f1f;
+        }
+
+        .modal-content textarea {
+            resize: none !important;
+        }
+
+        .homeContainer {
+            height: 100vh;
+        }
+
+        .homeContainer #piechart {
+            width: 50%;
+            height: 500px;
+            background-color: #3f3f3f;
+            -webkit-box-shadow: 0 0 20px #242424;
+            box-shadow: 0 0 20px #242424;
+            margin-top: 200px;
+            border-radius: 15px;
+        }
+
+        .homeContainer #piechart div div:nth-child(1) {
+            width: 100% !important;
+        }
+
+        .homeContainer #piechart div svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .homeContainer #piechart div svg g text {
+            font-size: 20px;
+            color: #fff !important;
+            fill: #66ff99;
+        }
+
+        .homeContainer #piechart div svg g:nth-child(2) {
+            height: 200px;
+        }
+
+        .homeContainer #piechart rect {
+            width: 100%;
+            height: 400;
+            stroke: none;
+            stroke-width: 0;
+            fill: transparent;
+        }
+
+        .userInfos {
+            width: 400px;
+            padding-left: 50px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .userInfos .info {
+            width: 100%;
+            margin: 20px 0;
+            padding: 15px;
+        }
+
+        .userInfos .info span {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0d7377;
+            margin-right: 20px;
+        }
+
+        .userInfos .info div {
+            font-size: 26px;
+            font-weight: 800;
+            color: #66ff99;
+        }
+
+        #addnewsForm {
+            width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
+
+        #addnewsForm textarea {
+            resize: none !important;
+        }
+
+        #addnewsForm input[type=text],
+        #addnewsForm input[type=file],
+        #addnewsForm select,
+        #addnewsForm textarea {
+            background-color: #fff !important;
+        }
+
+        #addnewsForm input:focus,
+        #addnewsForm select:focus,
+        #addnewsForm textarea:focus {
+            -webkit-box-shadow: 0 0 5px #769FCD !important;
+            box-shadow: 0 0 5px #769FCD !important;
+        }
+
+        #addnewsForm label span {
+            color: #f14848;
+        }
+
+        #addnewsForm .wrapper {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+        }
+
+        #addnewsForm .wrapper div {
+            width: 50%;
+            margin: 5px;
+        }
+
+        #addnewsForm #the-count {
+            width: 100%;
+            text-align: right;
+        }
+
+        .tagsBox {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .tagsBox .tagsInput {
+            width: 100%;
+            margin-right: 10px;
+        }
+
+        .tagsBox .tag-container {
+            margin-top: 25px;
+            width: 100%;
+            min-height: 50px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .tag {
+            pointer-events: none;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #D6E6F2;
+            color: #252525;
+            padding: 6px 6px 6px 10px;
+            margin: 2px 5px;
+            border-radius: 20px;
+            height: 30px;
+        }
+
+        .tag::before {
+            float: right;
+            pointer-events: all;
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            content: 'X';
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            margin-left: 6px;
+            text-align: center;
+            color: #fff;
+            background-color: #769FCD;
+            cursor: pointer;
+        }
+
+        /*# sourceMappingURL=style.css.map */
+    </style>
+    <title><%= title %> </title>
+</head>
+
+<body>
+    <% var newsDataTags %>
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
+        <div class="container">
+            <a class="navbar-brand h1" style="font-size: 26px;" href="#">Yangiliklar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Asosiy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/addnews">Yangilik qo'shish</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/myposts">Mening postlarim</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Akkaunt
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="#">Sozlamalar</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/logout">Chiqish</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <form class="d-flex mainSearchInputForm" method="POST" action="/news/search" role="search"
+                    autocapitalize="off"'>
+                <input id="mainSearchInput" name="keyword" class="form-control me-2" type="search" placeholder="Izlash"
+                    aria-label="Search">
+                <button class="btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <div class="container mainContainer">
+
+        <div class="categories">
+            <ul class="categoriesList">
+                <li class="categoryListItem"><a href="" class="category activeCategory">Hammasi</a></li>
+                <li class="categoryListItem"><a href="" class="category">Dunyo</a></li>
+                <li class="categoryListItem"><a href="" class="category">Sport</a></li>
+                <li class="categoryListItem"><a href="" class="category">Texnologiya</a></li>
+                <li class="categoryListItem"><a href="" class="category">Tabiat</a></li>
+                <li class="categoryListItem"><a href="" class="category">Iqtisod</a></li>
+                <li class="categoryListItem"><a href="" class="category">Siyosat</a></li>
+            </ul>
+        </div>
+        <% if(newsDataTags) { %>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <% for(let item of newsDataTags) {%>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img class="newsItemPhoto bd-placeholder-img card-img-top" width="100%" height="225"
+                        src="/uploadedPhotos/<%= item.photo %> " />
+
+                    <div class="card-body">
+                        <h4 class="newsItemTitle"><%= item.heading %> </h4>
+                        <p class="card-text" style="height: 100px; word-break: break-word; text-align: justify;"><%= item.short %> </p>
+                        <small class="text-muted" style="color: #7e7e7e;"><%= item.tags %> </small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <small class="text-muted"><%= item.posterName %> tomonidan </small>
+                                <small class="text-muted"><%= item.addedTime %> da qo' shilgan</small> </div> <div
+                    class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Shikoyat</button>
+                    <a id="batafsil" href="/more/<%= item.ID %> " value="<%= item.ID %> "
+                        class="btn btn-sm btn-outline-secondary">
+                        <!-- <a href="/more">Batafsil</a> -->
+                        Batafsil
+                    </a>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <% } %>
+
+        </div>
+        <% } %>
+
+        </div>
+        </section>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+        </script>
+
+        <script>
+            const moreInfoButtons = document.querySelectorAll('#batafsil')
+
+            // moreInfoButtons.forEach(btn => {
+
+            //     btn.addEventListener('click', async (event) => {
+            //         // event.preventDefault();
+
+            //         console.log(btn.value);
+
+            //         await fetch('/more/' + btn.value)
+            //     })
+            // })
+        </script>
+
+</body>
+
+</html>

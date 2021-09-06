@@ -1,13 +1,98 @@
 <%- include('parts/header') %>
+<% var allNews %>
 
-<nav>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
     <div class="container">
-        <ul class="nav"></ul>
+        <a class="navbar-brand h1" style="font-size: 26px;" href="#">Yangiliklar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/news">Asosiy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/addnews">Yangilik qo'shish</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/myposts">Mening postlarim</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Akkaunt
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile">Profil</a></li>
+                        <li><a class="dropdown-item" href="/settings">Sozlamalar</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Chiqish</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="d-flex mainSearchInputForm" method="POST" action="/news" role="search" autocapitalize="off"'>
+                <input id="mainSearchInput" name="keyword" class="form-control me-2" type="search" placeholder="Izlash"
+                    aria-label="Search">
+                <button class="btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </nav>
 
 <section>
-    <div class="container">
+    <div class="container mainContainer">
+
+        <div class="categories">
+            <ul class="categoriesList">
+                <li class="categoryListItem"><a href="" class="category activeCategory">Hammasi</a></li>
+                <li class="categoryListItem"><a href="" class="category">Dunyo</a></li>
+                <li class="categoryListItem"><a href="" class="category">Sport</a></li>
+                <li class="categoryListItem"><a href="" class="category">Texnologiya</a></li>
+                <li class="categoryListItem"><a href="" class="category">Tabiat</a></li>
+                <li class="categoryListItem"><a href="" class="category">Iqtisod</a></li>
+                <li class="categoryListItem"><a href="" class="category">Siyosat</a></li>
+            </ul>
+        </div>
+        <% if(allNews) { %>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <% for(let item of allNews) {%>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img class="newsItemPhoto bd-placeholder-img card-img-top" width="100%" height="225"
+                        src="/uploadedPhotos/<%= item.photo %> " />
+
+                    <div class="card-body">
+                        <h4 class="newsItemTitle"><%= item.heading %> </h4>
+                        <p class="card-text" style="height: 100px; word-break: break-word; text-align: justify;"><%= item.short %> </p>
+                        <small class="text-muted" style="color: #7e7e7e;"><%= item.tags %> </small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <small class="text-muted"><%= item.posterName %> tomonidan </small>
+                                <small class="text-muted"><%= item.addedTime %> da qo'shilgan</small>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Shikoyat</button>
+                                <a id="batafsil" href="/news/batafsil/<%= item.ID %> " value="<%= item.ID %> " class="btn btn-sm btn-outline-secondary">
+                                    <!-- <a href="/more">Batafsil</a> -->
+                                    Batafsil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+        </div>
+        <% } %>
 
     </div>
 </section>
@@ -15,6 +100,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+</script>
+
+<script>
+
+    const moreInfoButtons = document.querySelectorAll('#batafsil')
+
+    // moreInfoButtons.forEach(btn => {
+
+    //     btn.addEventListener('click', async (event) => {
+    //         // event.preventDefault();
+
+    //         console.log(btn.value);
+
+    //         await fetch('/more/' + btn.value)
+    //     })
+    // })
+
+
 </script>
 
 </body>

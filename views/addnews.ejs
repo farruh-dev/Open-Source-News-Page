@@ -1,0 +1,231 @@
+<%- include('parts/header') %>
+<% var error %>
+
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
+    <div class="container">
+        <a class="navbar-brand h1" style="font-size: 26px;" href="#">Yangiliklar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">Asosiy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/addnews">Yangilik qo'shish</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/myposts">Mening postlarim</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Akkaunt
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile">Profil</a></li>
+                        <li><a class="dropdown-item" href="/settings">Sozlamalar</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Chiqish</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="d-flex mainSearchInputForm">
+                <input id="mainSearchInput" class="form-control me-2" disabled type="search" placeholder="Izlash"
+                    aria-label="Search">
+                <button class="btn" type="submit" disabled>
+                    <svg class="DCxYpf" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path class="lupa" stroke="none" fill="#769FCD"
+                            d="M16.32 14.88a8.04 8.04 0 1 0-1.44 1.44l5.76 5.76 1.44-1.44-5.76-5.76zm-6.36 1.08c-3.36 0-6-2.64-6-6s2.64-6 6-6 6 2.64 6 6-2.64 6-6 6z">
+                        </path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <div class="container mainContainer">
+        <div class="header">
+            <h2>Yangilik qo'shish</h2>
+        </div>
+        <form id="addnewsForm" action="/addnews" method="POST" enctype="multipart/form-data">
+            <% if(error){ %>
+            <div class="alert alert-danger"><%= error %> </div>
+            <% } %>
+
+            <div class="wrapper">
+                <div>
+                    <label for="heading">Sarlavha <span>*</span></label>
+                    <input class="form-control" name="heading" type="text" id="heading" autocomplete="off" />
+                </div>
+
+                <div>
+                    <label for="Category">Kategoriya <span>*</span></label>
+                    <select class="form-control" name="category" id="Category">
+                        <option value="world">Dunyo</option>
+                        <option value="sport">Sport</option>
+                        <option value="tech">Texnologiya</option>
+                        <option value="nature">Tabiat</option>
+                        <option value="economic">Iqtisod</option>
+                        <option value="policy">Siyosat</option>
+                        <option value="other">Boshqa</option>
+                    </select>
+                </div>
+            </div>
+
+            <label>Yangilik <span>*</span></label>
+            <textarea class="form-control" name="more" id="More" cols="30" rows="16"></textarea>
+
+            <div class="my-3">
+                <label for="photo">Kerakli linklar</label>
+                <div style="border: #769FCD 1px solid; border-radius: 5px; padding: 15px 5px;">
+                    <div class="linkDiv input-group">
+                        <div>
+                            <label>Nomi</label>
+                            <input class="form-control" name="linkname" type="text" id="linkname" />
+                        </div>
+                        <div style="flex-grow: 2;">
+                            <label>Link</label>
+                            <input class="form-control" name="link" type="text" id="link" />
+                        </div>
+                    </div>
+                    <button type="button" id="addNewLinkInputs" class="btn btn-outline-secondary mt-2" style="margin-left: auto;">+</button>
+                    <input type="hidden" class="form-check-input" value="placeholder.png" name="placeholder"
+                        id="placeholder" />
+
+                </div>
+            </div>
+
+            <div class="tagsBox my-3">
+                <div class="tagsInput">
+                    <label for="hashtags">Kalit so'zlar <span>*</span></label>
+                    <input class="form-control" type="text" id="hashtags" autocomplete="off">
+                </div>
+                <div class="tag-container">
+                </div>
+                <input id="hidden" type="hidden" name="tags">
+            </div>
+
+            <div>
+                <label for="photo">Rasm tanlang (yo'q bo'lsa bo'sh qoldiring)</label>
+                <input class="form-control" name="photo" accept="image/png, image/jpeg, image.jpg" type="file"
+                    id="photo" />
+                <input type="hidden" class="form-check-input" value="placeholder.png" name="placeholder"
+                    id="placeholder" />
+            </div>
+
+            <button class="btn btn-primary my-4" type="submit" style="float: right; width: 100px;">Jo'natish</button>
+        </form>
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+</script>
+
+<script>
+
+    const addNewLinkInputs = document.querySelector('#addNewLinkInputs')
+
+
+    let input, hashtagArray, container, t;
+
+    input = document.querySelector('#hashtags');
+    container = document.querySelector('.tag-container');
+    hashtagArray = [];
+
+    input.onchange = input.oninput = restrict;
+
+    function restrict() {
+        input.value = input.value.replace(/[^a-z]/g, "");
+    }
+
+    function insertTags(elem, arr) {
+        for (let i of arr) {
+
+        }
+    }
+
+    input.addEventListener('keyup', () => {
+
+        if (event.which == 32 && !input.value.startsWith(' ') && input.value.length > 0) {
+
+            const hashtag = input.value.trim()
+            var text = document.createTextNode(hashtag);
+            var p = document.createElement('span');
+            container.appendChild(p);
+            p.appendChild(text);
+            p.classList.add('tag');
+            input.value = '';
+
+            const tagElems = document.querySelectorAll('.tag')
+
+            // insertTags(hidden, tagElems)
+            hidden.value += text.textContent + ' '
+
+            tagElems.forEach(item => {
+                item.addEventListener('click', event => {
+                    let tags = hidden.value.split(' ')
+                    let filter = tags.filter(e => e != event.target.textContent)
+                    hidden.value = filter.join(' ')
+                    console.log(hidden.value);
+                    item.remove()
+                });
+            })
+
+            console.log(hidden.value);
+        }
+
+    });
+
+
+    // addnewsForm.addEventListener('submit', async (event) => {
+    //     event.preventDefault();
+
+    //     const heading = document.querySelector('#heading').value
+    //     const category = document.querySelector('#Category').value
+    //     const more = document.querySelector('#More').value
+    //     const photoInput = document.querySelector('#photo')
+
+    //     const tagElems = document.querySelectorAll('.tag')
+
+    //     for (let i of tagElems) {
+    //         hashtagArray.push(i.innerText.trim())
+    //     }
+
+    //     let tags = hashtagArray
+    //     // const photo = photoInput.files[0]
+
+    //     await fetch('/addnews', {
+    //         method: 'POST',
+
+    //         headers: {
+
+    //             'Content-Type': 'multipart/form-data'
+    //         },
+
+    //         body: JSON.stringify({
+    //             heading,
+    //             category,
+    //             more,
+    //             photo: photoInput.files[0], 
+    //             tags
+    //         })
+    //     })
+    // })
+</script>
+
+</body>
+
+</html>

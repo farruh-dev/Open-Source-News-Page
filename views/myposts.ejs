@@ -1,0 +1,108 @@
+<%- include('parts/header') %>
+<% var userPosts %>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
+    <div class="container">
+        <a class="navbar-brand h1" style="font-size: 26px;" href="#">Yangiliklar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">Asosiy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addnews">Yangilik qo'shish</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/myposts">Mening postlarim</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Akkaunt
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile">Profil</a></li>
+                        <li><a class="dropdown-item" href="/settings">Sozlamalar</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Chiqish</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+            <form class="d-flex mainSearchInputForm">
+                <input id="mainSearchInput" class="form-control me-2" type="search" placeholder="Izlash"
+                    aria-label="Search">
+                <button class="btn" type="submit">
+                    <svg class="DCxYpf" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path class="lupa" stroke="none" fill="#769FCD"
+                            d="M16.32 14.88a8.04 8.04 0 1 0-1.44 1.44l5.76 5.76 1.44-1.44-5.76-5.76zm-6.36 1.08c-3.36 0-6-2.64-6-6s2.64-6 6-6 6 2.64 6 6-2.64 6-6 6z">
+                        </path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <div class="container mainContainer">
+
+        <div class="categories">
+            <ul class="categoriesList">
+                <li class="categoryListItem"><a href="" class="category activeCategory">Hammasi</a></li>
+                <li class="categoryListItem"><a href="" class="category">Dunyo</a></li>
+                <li class="categoryListItem"><a href="" class="category">Sport</a></li>
+                <li class="categoryListItem"><a href="" class="category">Texnologiya</a></li>
+                <li class="categoryListItem"><a href="" class="category">Tabiat</a></li>
+                <li class="categoryListItem"><a href="" class="category">Iqtisod</a></li>
+                <li class="categoryListItem"><a href="" class="category">Siyosat</a></li>
+            </ul>
+        </div>
+        <% if(userPosts){ %>
+
+            
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <% for(let item of userPosts) {%>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="newsItemPhoto bd-placeholder-img card-img-top" width="100%" height="225"
+                            src="/uploadedPhotos/<%= item.photo %> " />
+
+                        <div class="card-body">
+                            <h4 class="newsItemTitle"><%= item.heading %> </h4>
+                            <p class="card-text"><%= item.short %> </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><%= item.addedTime %> </small>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Shikoyat</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Batafsil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+            </div>
+        <% } %>
+
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+</script>
+
+</body>
+
+</html>
