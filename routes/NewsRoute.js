@@ -2,7 +2,24 @@ const router = require('express').Router();
 const { createToken, checkToken } = require('../module/jwt');
 
 
-router.get('/', async (req, res) =>{
+async function AuthUserMiddleware(req, res, next) {
+    if (!req.cookies.token) {
+        res.redirect('/login')
+        return;
+    }
+
+    const isTrust = checkToken(req.cookies.token)
+
+    if (isTrust) {
+        req.user = isTrust
+        next()
+    } else {
+        res.redirect('/login')
+        return;
+    }
+}
+
+router.get('/', AuthUserMiddleware, async (req, res) =>{
     const newsData = await req.db.posts.find().toArray()
 
     const allNews = newsData.reverse()
@@ -58,14 +75,25 @@ router.post('/', async (req, res) =>{
 
 router.get('/batafsil/:id', async (req, res) =>{
 
-    const moreInfo = await req.db.posts.findOne(
-        {ID: req.params.id}
-    )
+    try {
+        const moreInfo = await req.db.posts.findOne(
+            {ID: req.params.id}
+        )
+        if (!moreInfo) {
+            
+            res.render('more', {
+                title: 'Not Found'
+            })
+            return
+        }
+        
+        const links = moreInfo.links
+        
+        res.render('more', {title: "Batafsil", moreInfo, links})
 
-    res.render('more',{
-        title: 'Batafsil',
-        moreInfo
-    })
+    } catch (error) {
+        if (error) throw error
+    }
 
 })
 

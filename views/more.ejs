@@ -461,6 +461,7 @@
 
 <body>
     <% var moreInfo %>
+    <% var links %>
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #769FCD;">
         <div class="container">
@@ -531,6 +532,14 @@
                             <h4 class="newsItemTitle"><%= moreInfo.heading %> </h4>
 
                             <p class="card-text"><%= moreInfo.more %> </p>
+
+                            <% if(links) { %>
+                                <% for (let l of links) {%>
+                                    <div>
+                                        <span><%= l.linkname %>: </span> <a href="<%= l.link %> " target="_blank"><%= l.link %> </a>
+                                    </div>
+                                <% } %> 
+                            <% } %>  
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <small class="text-muted">Foydalanuvchi: <%= moreInfo.posterName %> </small>

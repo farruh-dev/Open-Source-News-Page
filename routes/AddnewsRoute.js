@@ -26,7 +26,7 @@ router.get('/' , (req, res) =>{
 })
 
 router.post('/', expressFileUpload(), async (req, res) =>{
-    const {heading, category, more, tags} = req.body
+    const {heading, category, more, tags, linkname, link} = req.body
     let {placeholder} = req.body
 
     const date = new Date()
@@ -76,7 +76,13 @@ router.post('/', expressFileUpload(), async (req, res) =>{
         more,
         addedTime: currentDate,
         photo,
-        tags: tags.split(' ')
+        tags: tags.split(' '),
+        links: [
+            {
+                linkname,
+                link
+            }
+        ]
     }
 
     console.log(newPost);

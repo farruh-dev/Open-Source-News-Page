@@ -43,7 +43,7 @@ app.set('view engine', 'ejs')
 
     app.get("/logout", async (req, res) => {
         console.log(req.cookies.token);
-        res.clearCookie('token').redirect('/login')
+        res.clearCookie('token').redirect('/')
     })
 
 

@@ -54,6 +54,7 @@ router.post('/', async (req, res) =>{
             name,
             email: email.toLowerCase(),
             password: await createCrypt(password),
+            userphoto: 'userphoto.png'
         })
     
         res.redirect('/')

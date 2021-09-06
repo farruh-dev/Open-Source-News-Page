@@ -51,53 +51,46 @@
 	<div style="height: 100vh;" class="container d-flex align-items-center">
 		<% if(profile) { %>
 		<div style="width: 80%; margin: auto;">
-			<% for(let item of profile) {%>
-			<div class="col">
-				<div class="card shadow-sm">
-					<div style="width: 80%; margin: auto;" class="card-body">
-
-                        <div class="userPhoto" 
-                        style="
-                        border-radius: 6px;
-                            width: 200px;
-                            height: 200px;
-                            margin: auto; 
-                            background-image: url('/uploadedPhotos/placeholder.png');
-                            background-repeat: no-repeat;
-                            background-size: cover;
-                            background-position: center;
-                            ">
-                            <!-- <img src="/uploadedPhotos/placeholder.png" alt="photo" class="currentPhoto" width="" height="auto"> -->
+			<form action="/settings" method="POST" enctype="multipart/form-data">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div style="width: 80%; margin: auto;" class="card-body">
+    
+                            <div class="userPhoto" 
+                            style="
+                            border-radius: 6px;
+                                width: 200px;
+                                height: 200px;
+                                margin: auto; 
+                                background-image: url('/userPhoto/userphoto.png');
+                                background-repeat: no-repeat;
+                                background-size: cover;
+                                background-position: center;
+                                ">
+                                <!-- <img src="/uploadedPhotos/placeholder.png" alt="photo" class="currentPhoto" width="" height="auto"> -->
+                            </div>
+    
+                            <div>
+                                <label for="newName">Rasmni o'zgartirish:</label>
+                                <input type="file" accept="image/png, image/jpg, image/jpeg" class="newPhoto form-control" name="userphoto">
+                            </div>
+    
+                            <div class="my-4">
+                                <label for="newName">Ismingiz:</label>
+                                <input type="text" class="userName form-control" name="newName" value="<%= profile.name %>" />
+                            </div>
+    
+                            <div class="my-4">
+                                <label for="newName">E-mailingiz:</label>
+                                <input type="email" class="userEmail form-control" name="newEmail" value="<%= profile.email %>" />
+                            </div>
+    
+                            <button class="btn btn-primary" type="submit">Saqlash</button>
+                            
                         </div>
-
-                        <div>
-                            <label for="newName">Rasmni o'zgartirish:</label>
-                            <input type="file" class="newPhoto form-control">
-                        </div>
-
-                        <div class="my-4">
-                            <label for="newName">Ismingiz:</label>
-                            <input type="text" class="userName form-control" name="newName" value="<%= item.name %>" />
-                        </div>
-
-                        <div class="my-4">
-                            <label for="newName">E-mailingiz:</label>
-                            <input type="email" class="userEmail form-control" name="newEmail" value="<%= item.email %>" />
-                        </div>
-
-						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-outline-secondary">Shikoyat</button>
-							<a id="batafsil" href="/news/batafsil/<%= item.ID %> " value="<%= item.ID %> "
-								class="btn btn-sm btn-outline-secondary">
-								<!-- <a href="/more">Batafsil</a> -->
-								Batafsil
-							</a>
-						</div>
-					    
-				    </div>
-			    </div>
-		    </div>
-		    <% } %>
+                    </div>
+                </div>
+            </form>
 
 	    </div>
 	    <% } %>
