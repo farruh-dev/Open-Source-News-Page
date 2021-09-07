@@ -58,33 +58,21 @@ router.post('/', expressFileUpload(), async (req, res) => {
 
     const user = await getUser(req)
 
-    const directory = path.join(__dirname, '..', 'public', 'userPhoto');
+    const directory = path.join(__dirname, '..', 'public', 'userPhoto', user.name + '|' + user.email);
 
-    const checkFolder = await fs.readdir(directory, 'utf-8')
+    await fs.mkdir(directory, {
+        recursive: true
+    })
 
-    if (checkFolder.length > 0 || checkFolder.includes('userphoto.png')) {
-        await fs.readdir(directory, async (err, files) => {
-            if (err) throw err;
+    await req.files.userphoto.mv(path.join(directory, req.files.userphoto.name))
 
-            for (const file of files) {
-                await fs.unlink(path.join(directory, file), err => {
-                    if (err) throw err;
-                });
-            }
-        });
+    let myQuery = {_id: ObjectId(user._id)}
 
-    }
+    let newvalues = { $set: { userphoto: req.files.userphoto.name } };
 
-    await req.files.userphoto.mv(path.join(__dirname, '..', 'public', 'userPhoto', 'userphoto.png'))
+    await req.db.users.updateOne(myQuery, newvalues)
 
-    // await req.db.users.updateOne({
-    //     _id: ObjectId(user._id)
-    // }, {
-    //     $set: {
-    //         name: newName,
-    //         email: newEmail
-    //     }
-    // })
+    res.redirect('/settings')
 
     // await res.clearCookie('token')
 

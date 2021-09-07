@@ -86,24 +86,45 @@
             <label>Yangilik <span>*</span></label>
             <textarea class="form-control" name="more" id="More" cols="30" rows="16"></textarea>
 
-            <div class="my-3">
+            <div class="my-3 d-flex flex-column">
                 <label for="photo">Kerakli linklar</label>
-                <div style="border: #769FCD 1px solid; border-radius: 5px; padding: 15px 5px;">
+                <div class="linkList">
                     <div class="linkDiv input-group">
                         <div>
                             <label>Nomi</label>
-                            <input class="form-control" name="linkname" type="text" id="linkname" />
+                            <input class="form-control linkname" name="linkname" type="text" />
                         </div>
                         <div style="flex-grow: 2;">
                             <label>Link</label>
-                            <input class="form-control" name="link" type="text" id="link" />
+                            <input class="form-control link" name="link" type="text" />
                         </div>
                     </div>
-                    <button type="button" id="addNewLinkInputs" class="btn btn-outline-secondary mt-2" style="margin-left: auto;">+</button>
+                    <div class="linkDiv input-group">
+                        <div>
+                            <input class="form-control linkname" name="linkname2" type="text" />
+                        </div>
+                        <div style="flex-grow: 2;">
+                            <input class="form-control link" name="link2" type="text" />
+                        </div>
+                    </div>
+                    <div class="linkDiv input-group">
+                        <div>
+                            <input class="form-control linkname" name="linkname3" type="text" />
+                        </div>
+                        <div style="flex-grow: 2;">
+                            <input class="form-control link" name="link3" type="text" />
+                        </div>
+                    </div>
+
                     <input type="hidden" class="form-check-input" value="placeholder.png" name="placeholder"
-                        id="placeholder" />
+                        id="hiddenLinks" />
 
                 </div>
+                <!-- <div class="d-flex" style="width: 100%;">
+                    <div style="margin-left: auto;">
+                        <button type="button" id="doneLinks" class="btn btn-outline-success mt-2">Done</button>
+                    </div>
+                </div> -->
             </div>
 
             <div class="tagsBox my-3">
@@ -135,8 +156,55 @@
 </script>
 
 <script>
+    // const addNewLinkInputs = document.querySelector('#addNewLinkInputs')
+    // const linkList = document.querySelector('.linkList')
 
-    const addNewLinkInputs = document.querySelector('#addNewLinkInputs')
+    // const linkDiv = document.querySelectorAll('.linkDiv')
+
+    // let x = 0
+
+    // addNewLinkInputs.addEventListener('click', () => {
+
+    //     x += 1
+
+    //     const newParentDiv = document.createElement('div')
+
+    //     const newNameDiv = document.createElement('div')
+    //     const newNameLabel = document.createElement('label')
+    //     const newNameInput = document.createElement('input')
+
+    //     const newLinkDiv = document.createElement('div')
+    //     const newLinkLabel = document.createElement('label')
+    //     const newLinkInput = document.createElement('input')
+
+    //     newParentDiv.classList.add('linkDiv', 'input-group', 'my-2')
+    //     newLinkDiv.style.flexGrow = '2'
+    //     newNameInput.classList.add('form-control', 'linkname')
+    //     newLinkInput.classList.add('form-control', 'link')
+    //     newNameInput.name = 'linkname'
+    //     newLinkInput.name = 'link'
+    //     newNameInput.type = 'text'
+    //     newLinkInput.type = 'text'
+
+    //     newNameLabel.textContent = 'Nomi'
+    //     newLinkLabel.textContent = 'Link'
+
+    //     // newNameDiv.appendChild(newNameLabel)
+    //     newNameDiv.appendChild(newNameInput)
+
+    //     // newLinkDiv.appendChild(newLinkLabel)
+    //     newLinkDiv.appendChild(newLinkInput)
+
+    //     newParentDiv.appendChild(newNameDiv)
+    //     newParentDiv.appendChild(newLinkDiv)
+
+    //     linkList.appendChild(newParentDiv)
+
+    //     if (x >= 4) {
+    //         addNewLinkInputs.disabled = true
+    //     }
+
+    // })
 
 
     let input, hashtagArray, container, t;

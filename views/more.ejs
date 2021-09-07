@@ -536,7 +536,17 @@
                             <% if(links) { %>
                                 <% for (let l of links) {%>
                                     <div>
-                                        <span><%= l.linkname %>: </span> <a href="<%= l.link %> " target="_blank"><%= l.link %> </a>
+                                        <% if(l.linkname && l.link) {%> 
+                                            <span><%= l.linkname %>: </span> <a href="<%= l.link %> " target="_blank"><%= l.link %> </a>
+                                        <% } %> 
+                                        
+                                        <% if(l.linkname2 && l.link2) {%> 
+                                            <span><%= l.linkname2 %>: </span> <a href="<%= l.link2 %> " target="_blank"><%= l.link2 %> </a>
+                                        <% } %>
+                                        
+                                        <% if(l.linkname3 && l.link3) {%> 
+                                            <span><%= l.linkname3 %>: </span> <a href="<%= l.link3 %> " target="_blank"><%= l.link3 %> </a>
+                                        <% } %> 
                                     </div>
                                 <% } %> 
                             <% } %>  

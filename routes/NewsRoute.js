@@ -38,33 +38,28 @@ router.post('/', async (req, res) =>{
     }
 
     const newsDataTags = await req.db.posts.find({ tags: keyword }).toArray()
-    const newsDataNames =   await req.db.posts.find().toArray()
+    // const newsDataNames =   await req.db.posts.find().toArray()
    
-    let array = []
+    // let array = []
     
-    for(let i of newsDataNames){
+    // for(let i of newsDataNames){
         
-        if( i.heading.toLowerCase().includes( keyword.toLowerCase() ) ){
-            array.push(i)
-        }
+    //     if( i.heading.toLowerCase().includes( keyword.toLowerCase() ) ){
+    //         array.push(i)
+    //     }
         
-    }
+    // }
     
-    // console.log(newsDataTags, '/////////////////////', array);
+    // // console.log(newsDataTags, '/////////////////////', array);
 
-    for(let i of array){
-        for(let e of newsDataTags){
-            if(i.ID != e.ID){
-                newsDataTags.push(i)
-            }
-        }
-    }
+    // for(let i of array){
+    //     for(let e of newsDataTags){
+    //         if(i.ID != e.ID){
+    //             newsDataTags.push(i)
+    //         }
+    //     }
+    // }
     
-    // newsDataTags.concat(...array)
-
-    console.log(newsDataTags);
-
-    // const allNews = newsData.reverse()
 
     res.render('mainsearchRes',{
         title: 'Izlash',

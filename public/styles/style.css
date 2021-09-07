@@ -123,7 +123,8 @@ button:focus {
   background-color: #fff;
 }
 
-.mainSearchInputForm .btn:focus, .mainSearchInputForm .btn:hover .lupa {
+.mainSearchInputForm .btn:focus,
+.mainSearchInputForm .btn:hover .lupa {
   fill: #fff;
 }
 
@@ -324,11 +325,16 @@ button:focus {
   resize: none !important;
 }
 
-#addnewsForm input[type=text], #addnewsForm input[type=file], #addnewsForm select, #addnewsForm textarea {
+#addnewsForm input[type=text],
+#addnewsForm input[type=file],
+#addnewsForm select,
+#addnewsForm textarea {
   background-color: #fff !important;
 }
 
-#addnewsForm input:focus, #addnewsForm select:focus, #addnewsForm textarea:focus {
+#addnewsForm input:focus,
+#addnewsForm select:focus,
+#addnewsForm textarea:focus {
   -webkit-box-shadow: 0 0 5px #769FCD !important;
           box-shadow: 0 0 5px #769FCD !important;
 }
@@ -434,5 +440,28 @@ button:focus {
   color: #fff;
   background-color: #769FCD;
   cursor: pointer;
+}
+
+.linkList {
+  border: #769FCD 1px solid;
+  border-radius: 5px;
+  padding: 15px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.linkList .linkDiv {
+  margin: 10px 0;
+}
+
+#addNewLinkInputs {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  justify-self: flex-end;
 }
 /*# sourceMappingURL=style.css.map */

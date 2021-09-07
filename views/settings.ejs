@@ -48,7 +48,7 @@
     </div>
 </nav>
 <section>
-	<div style="height: 100vh;" class="container d-flex align-items-center">
+	<div style="height: 80vh;" class="container d-flex align-items-center">
 		<% if(profile) { %>
 		<div style="width: 80%; margin: auto;">
 			<form action="/settings" method="POST" enctype="multipart/form-data">
@@ -62,7 +62,7 @@
                                 width: 200px;
                                 height: 200px;
                                 margin: auto; 
-                                background-image: url('/userPhoto/userphoto.png');
+                                background-image: url('/userPhoto/<%= profile.name %>|<%= profile.email %>/<%= profile.userphoto %>');
                                 background-repeat: no-repeat;
                                 background-size: cover;
                                 background-position: center;
